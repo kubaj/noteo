@@ -1,21 +1,20 @@
 <style scoped>
   img {
     margin-top: 25px;
-    width: 450px;
   }
 </style>
 
 <template>
   <div>
-    <md-toolbar class="md-medium">
+    <md-toolbar class="md-dense">
       <div class="md-toolbar-container">
-        <md-button class="md-icon-button">
+        <md-button class="md-icon-button" @click="toggleLeftSidenav">
           <md-icon>menu</md-icon>
         </md-button>
 
-        <h2 class="md-title" style="flex: 1;">Vue Material</h2>
+        <h2 class="md-title" style="flex: 1;">Noteo</h2>
 
-        <md-button class="md-icon-button">
+        <md-button class="md-icon-button" v-on:click="search">
           <md-icon>search</md-icon>
         </md-button>
 
@@ -24,29 +23,22 @@
         </md-button>
       </div>
     </md-toolbar>
-    <img src="./LandingPageView/assets/logo.png" alt="electron-vue">
-    <h1>Welcome.</h1>
-    <current-page></current-page>
-    <versions></versions>
-    <links></links>
-    <md-tabs md-fixed>
-      <md-tab md-label="Movies" md-icon="ondemand_video">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-      </md-tab>
 
-      <md-tab md-label="Music" md-icon="music_note">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-      </md-tab>
+    <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')">
+      <md-toolbar class="md-large">
+        <div class="md-toolbar-container">
+          <h3 class="md-title">Noteo menu</h3>
+        </div>
+      </md-toolbar>
 
-      <md-tab md-label="Books" md-icon="books">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-      </md-tab>
+      <md-list>
+        <md-list-item @click="scanLib">
+          <md-icon>search</md-icon> <span>Scan library</span>
+        </md-list-item>
+      </md-list>
 
-      <md-tab md-label="Pictures" md-icon="photo">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-      </md-tab>
-    </md-tabs>
+    </md-sidenav>
+
   </div>
 </template>
 
@@ -54,12 +46,38 @@
   import CurrentPage from './LandingPageView/CurrentPage'
   import Links from './LandingPageView/Links'
   import Versions from './LandingPageView/Versions'
+  import scanDir from './scanner'
+  const dialog = require('electron').remote.dialog
 
   export default {
     components: {
       CurrentPage,
       Links,
       Versions
+    },
+    methods: {
+      search: function (event) {
+        alert('search clicked')
+      },
+      toggleLeftSidenav: function (event) {
+        this.$refs.leftSidenav.toggle()
+      },
+      scanLib: function (event) {
+        this.toggleLeftSidenav()
+        dialog.showOpenDialog({
+          properties: ['openDirectory']
+        }, function (files) {
+          if (files) {
+            scanDir(files[0])
+          }
+        })
+      },
+      open: function (event) {
+
+      },
+      close: function (event) {
+
+      }
     },
     name: 'landing-page'
   }

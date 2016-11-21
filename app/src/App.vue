@@ -12,7 +12,6 @@
   body { height: 100%; }
 
   body {
-    align-items: center;
     background:
       radial-gradient(
         ellipse at center,
@@ -20,10 +19,7 @@
         rgba(229, 229, 229, .85) 100%
       );
     background-position: center;
-    display: flex;
     font-family: Roboto, Helvetica, sans-serif;
-    justify-content: center;
-    text-align: center;
   }
 </style>
 
