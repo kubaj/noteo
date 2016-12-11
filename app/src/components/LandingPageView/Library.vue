@@ -9,7 +9,6 @@
         <div class="genresSection">
             <genres></genres>
         </div>
-        <button v-on:click="counterInc">asdf</button>
     </div>
 </template>
 
@@ -22,9 +21,9 @@
       ArtistPreview
     },
     methods: {
-      counterInc: function () {
-        this.$store.dispatch('getGenres')
-      }
+    },
+    created: function () {
+      this.$store.dispatch('getGenres')
     },
     data () {
       return {}
