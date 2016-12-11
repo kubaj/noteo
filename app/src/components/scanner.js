@@ -3,7 +3,7 @@ const fs = require('fs')
 const mm = require('musicmetadata')
 const mime = require('mime')
 const path = require('path')
-const Dexie = require('dexie')
+const getDB = require('../vuex/db')
 
 let db = {}
 
@@ -46,13 +46,7 @@ class Genre {
 let audio = new Audio()
 
 function scanDir (dir, callback) {
-  db = new Dexie('lib')
-  db.version(1).stores({
-    songs: '++id,artist,album,name,&file',
-    albums: '++id,&[artist+name],year,genre',
-    artists: '++id,&name,*albums',
-    genres: '++id,&name'
-  })
+  db = getDB()
 
   db.songs.mapToClass(Song)
   db.albums.mapToClass(Album)

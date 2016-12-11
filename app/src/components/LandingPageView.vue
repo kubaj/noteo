@@ -1,7 +1,7 @@
 <style scoped>
-  img {
-    margin-top: 25px;
-  }
+    .md-tabs .md-tab {
+      padding: 0px;
+    }
 </style>
 
 <template>
@@ -39,6 +39,25 @@
 
     </md-sidenav>
 
+    <md-tabs class="md-transparent">
+      <md-tab id="library" md-label="Library">
+        <library></library>
+      </md-tab>
+
+      <md-tab id="artists" md-label="Artists">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
+      </md-tab>
+
+      <md-tab id="now-playing" md-label="Now playing">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+      </md-tab>
+
+      <md-tab id="settings" md-label="Settings">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+      </md-tab>
+    </md-tabs>
+
   </div>
 </template>
 
@@ -46,11 +65,13 @@
   import CurrentPage from './LandingPageView/CurrentPage'
   import Links from './LandingPageView/Links'
   import Versions from './LandingPageView/Versions'
+  import Library from './LandingPageView/Library'
   import scanDir from './scanner'
   const dialog = require('electron').remote.dialog
 
   export default {
     components: {
+      Library,
       CurrentPage,
       Links,
       Versions
