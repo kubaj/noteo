@@ -18,8 +18,29 @@
 
 <template>
     <div>
-        <md-toolbar class="md-dense">
+        <md-toolbar class="md-medium">
             <div class="md-toolbar-container">
+
+                <md-button class="md-icon-button">
+                    <md-icon>picture_in_picture</md-icon>
+                </md-button>
+
+                <md-button class="md-icon-button" v-on:click="fastRewind">
+                    <md-icon>fast_rewind</md-icon>
+                </md-button>
+
+                <md-button class="md-icon-button" v-on:click="play">
+                    <md-icon>play_circle_outline</md-icon>
+                </md-button>
+
+                <md-button class="md-icon-button" v-on:click="fastForward">
+                    <md-icon>fast_forward</md-icon>
+                </md-button>
+
+                <md-button class="md-icon-button" v-on:click="like">
+                    <md-icon>favorite_border</md-icon>
+                </md-button>
+
                 <md-button class="md-icon-button" @click="toggleLeftSidenav">
                     <md-icon>menu</md-icon>
                 </md-button>
@@ -30,8 +51,8 @@
                     <md-icon>search</md-icon>
                 </md-button>
 
-                <md-button class="md-icon-button">
-                    <md-icon>filter_list</md-icon>
+                <md-button class="md-icon-button" v-on:click="settings">
+                    <md-icon>settings</md-icon>
                 </md-button>
             </div>
         </md-toolbar>
@@ -104,8 +125,24 @@
       Album
     },
     methods: {
+
+      play: function (event) {
+        alert('play clicked')
+      },
+      fastRewind: function (event) {
+        alert('fast_rewind clicked')
+      },
+      fastForward: function (event) {
+        alert('fast_forward clicked')
+      },
       search: function (event) {
         alert('search clicked')
+      },
+      like: function (event) {
+        alert('like clicked')
+      },
+      settings: function (event) {
+        alert('settings clicked')
       },
       toggleLeftSidenav: function (event) {
         this.$refs.leftSidenav.toggle()
