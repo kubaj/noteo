@@ -1,18 +1,4 @@
 <style scoped>
-    .md-tabs .md-tab {
-        padding: 0px;
-    }
-
-    .album-container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .album-placeholder {
-        width: 250px;
-        margin: 5px;
-    }
 
 </style>
 
@@ -73,52 +59,21 @@
 
         </md-sidenav>
 
-        <md-tabs class="md-transparent">
-            <md-tab id="library" md-label="Library">
-                <library></library>
-            </md-tab>
-
-            <md-tab id="artists" md-label="Artists">
-
-                <div class="album-container">
-                    <div class="album-placeholder" v-for="album in albums">
-                        <album :albumName="album.name" :artistName="album.artist" :albumPicture="'thumb://' + album.thumbnail"></album>
-                    </div>
-                </div>
-
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae,
-                    omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis
-                    nihil.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae,
-                    omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis
-                    nihil.</p>
-            </md-tab>
-
-            <md-tab id="now-playing" md-label="Now playing">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-            </md-tab>
-
-            <md-tab id="settings" md-label="Settings">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-            </md-tab>
-        </md-tabs>
-
         <md-dialog md-open-from="custom" md-close-to="#custom" ref="dialog1">
             <md-dialog-title>Settings</md-dialog-title>
             <md-dialog-content>
-              <md-input-container>
-                <label for="movie">Theme</label>
-                <md-select name="movie" id="movie" v-model="movie">
-                  <md-option value="fight_club">Fight Club</md-option>
-                  <md-option value="godfather">Godfather</md-option>
-                  <md-option value="godfather_ii">Godfather II</md-option>
-                </md-select>
-              </md-input-container>
+                <md-input-container>
+                    <label for="movie">Theme</label>
+                    <md-select name="movie" id="movie" v-model="movie">
+                        <md-option value="fight_club">Fight Club</md-option>
+                        <md-option value="godfather">Godfather</md-option>
+                        <md-option value="godfather_ii">Godfather II</md-option>
+                    </md-select>
+                </md-input-container>
 
-              <div>
-                <md-switch v-model="checked1" id="my-test1"  name="my-test1" class="md-primary">Show genre</md-switch>
-              </div>
+                <div>
+                    <md-switch v-model="checked1" id="my-test1"  name="my-test1" class="md-primary">Show genre</md-switch>
+                </div>
             </md-dialog-content>
 
             <md-dialog-actions>
@@ -127,26 +82,18 @@
             </md-dialog-actions>
         </md-dialog>
 
-
+        <library></library>
     </div>
 </template>
 
 <script>
-  import CurrentPage from './LandingPageView/CurrentPage'
-  import Links from './LandingPageView/Links'
-  import Versions from './LandingPageView/Versions'
   import Library from './LandingPageView/Library'
-  import Album from './LandingPageView/Album'
   import scanDir from './scanner'
   const dialog = require('electron').remote.dialog
 
   export default {
     components: {
-      Library,
-      CurrentPage,
-      Links,
-      Versions,
-      Album
+      Library
     },
     methods: {
 
@@ -192,9 +139,6 @@
       }
     },
     computed: {
-      albums () {
-        return this.$store.getters.albums
-      }
     },
     name: 'landing-page'
   }
