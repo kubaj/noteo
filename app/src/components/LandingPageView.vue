@@ -1,64 +1,89 @@
 <style scoped>
     .md-tabs .md-tab {
-      padding: 0px;
+        padding: 0px;
     }
+
+    .album-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .album-placeholder {
+        width: 250px;
+        margin: 5px;
+    }
+
 </style>
 
 <template>
-  <div>
-    <md-toolbar class="md-dense">
-      <div class="md-toolbar-container">
-        <md-button class="md-icon-button" @click="toggleLeftSidenav">
-          <md-icon>menu</md-icon>
-        </md-button>
+    <div>
+        <md-toolbar class="md-dense">
+            <div class="md-toolbar-container">
+                <md-button class="md-icon-button" @click="toggleLeftSidenav">
+                    <md-icon>menu</md-icon>
+                </md-button>
 
-        <h2 class="md-title" style="flex: 1;">Noteo</h2>
+                <h2 class="md-title" style="flex: 1;">Noteo</h2>
 
-        <md-button class="md-icon-button" v-on:click="search">
-          <md-icon>search</md-icon>
-        </md-button>
+                <md-button class="md-icon-button" v-on:click="search">
+                    <md-icon>search</md-icon>
+                </md-button>
 
-        <md-button class="md-icon-button">
-          <md-icon>filter_list</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
+                <md-button class="md-icon-button">
+                    <md-icon>filter_list</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
 
-    <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')">
-      <md-toolbar class="md-large">
-        <div class="md-toolbar-container">
-          <h3 class="md-title">Noteo menu</h3>
-        </div>
-      </md-toolbar>
+        <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')">
+            <md-toolbar class="md-large">
+                <div class="md-toolbar-container">
+                    <h3 class="md-title">Noteo menu</h3>
+                </div>
+            </md-toolbar>
 
-      <md-list>
-        <md-list-item @click="scanLib">
-          <md-icon>search</md-icon> <span>Scan library</span>
-        </md-list-item>
-      </md-list>
+            <md-list>
+                <md-list-item @click="scanLib">
+                    <md-icon>search</md-icon>
+                    <span>Scan library</span>
+                </md-list-item>
+            </md-list>
 
-    </md-sidenav>
+        </md-sidenav>
 
-    <md-tabs class="md-transparent">
-      <md-tab id="library" md-label="Library">
-        <library></library>
-      </md-tab>
+        <md-tabs class="md-transparent">
+            <md-tab id="library" md-label="Library">
+                <library></library>
+            </md-tab>
 
-      <md-tab id="artists" md-label="Artists">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae, omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis nihil.</p>
-      </md-tab>
+            <md-tab id="artists" md-label="Artists">
 
-      <md-tab id="now-playing" md-label="Now playing">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-      </md-tab>
+                <div class="album-container">
+                    <div class="album-placeholder" v-for="album in albums">
+                        <album :albumName="album.name" :artistName="album.artist" albumPicture="file:///home/jakub/Downloads/card-sky.jpg"></album>
+                    </div>
+                </div>
 
-      <md-tab id="settings" md-label="Settings">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-      </md-tab>
-    </md-tabs>
 
-  </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae,
+                    omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis
+                    nihil.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae,
+                    omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis
+                    nihil.</p>
+            </md-tab>
+
+            <md-tab id="now-playing" md-label="Now playing">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+            </md-tab>
+
+            <md-tab id="settings" md-label="Settings">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+            </md-tab>
+        </md-tabs>
+
+    </div>
 </template>
 
 <script>
@@ -66,6 +91,7 @@
   import Links from './LandingPageView/Links'
   import Versions from './LandingPageView/Versions'
   import Library from './LandingPageView/Library'
+  import Album from './LandingPageView/Album'
   import scanDir from './scanner'
   const dialog = require('electron').remote.dialog
 
@@ -74,7 +100,8 @@
       Library,
       CurrentPage,
       Links,
-      Versions
+      Versions,
+      Album
     },
     methods: {
       search: function (event) {
@@ -98,6 +125,11 @@
       },
       close: function (event) {
 
+      }
+    },
+    computed: {
+      albums () {
+        return this.$store.getters.albums
       }
     },
     name: 'landing-page'
