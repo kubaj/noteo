@@ -4,7 +4,7 @@ const path = require('path')
 const mkdirp = require('mkdirp')
 const uuidV4 = require('uuid/v4')
 
-const imgCacheDir = path.join(app.getPath('userData'), 'ThumbailCache')
+const imgCacheDir = path.join(app.getPath('userData'), 'ThumbnailCache')
 
 export default class ImageProcessor {
   constructor () {
