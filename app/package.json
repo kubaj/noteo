@@ -4,6 +4,8 @@
   "description": "An electron-vue project",
   "main": "electron.js",
   "dependencies": {
+    "mkdirp": "^0.5.1",
+    "uuid": "^3.0.1",
     "vue": "^2.0.1",
     "vue-electron": "^1.0.0",
     "vue-resource": "^1.0.3",
