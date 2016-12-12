@@ -35,3 +35,9 @@ export const getGenres = ({ commit }) => {
     commit(types.SET_GENRES, data)
   })
 }
+
+export const getAllAlbums = ({ commit }) => {
+  getDB().albums.toCollection().toArray().then((data) => {
+    commit(types.SET_ALBUMS, data)
+  })
+}

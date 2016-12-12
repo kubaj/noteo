@@ -39,6 +39,7 @@
     },
     created: function () {
       this.$store.dispatch('getGenres')
+      this.$store.dispatch('getAllAlbums')
     },
     computed: {
       albums () {
