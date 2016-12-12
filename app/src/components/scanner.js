@@ -77,7 +77,7 @@ function scanTags (scannedFile, next) {
   scannedFile.mime = mime.lookup(scannedFile.fullPath)
   scannedFile.canplay = audio.canPlayType(scannedFile.mime)
 
-  mm(fs.createReadStream(scannedFile.fullPath), function (err, metadata) {
+  mm(fs.createReadStream(scannedFile.fullPath), { duration: true }, function (err, metadata) {
     if (err) next()
     scannedFile.metadata = metadata
 
@@ -124,7 +124,8 @@ function insertSong (scannedFile) {
     scannedFile.metadata.title,
     scannedFile.metadata.track.no,
     -1,
-    scannedFile.fullPath, 0, 0)
+    scannedFile.fullPath,
+    scannedFile.metadata.duration, 0)
 
   db.songs.put(newSong)
 }
