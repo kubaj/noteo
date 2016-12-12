@@ -51,7 +51,7 @@
                     <md-icon>search</md-icon>
                 </md-button>
 
-                <md-button class="md-icon-button" v-on:click="settings">
+                <md-button class="md-icon-button" v-on:click="settings('dialog1')">
                     <md-icon>settings</md-icon>
                 </md-button>
             </div>
@@ -104,6 +104,30 @@
             </md-tab>
         </md-tabs>
 
+        <md-dialog md-open-from="custom" md-close-to="#custom" ref="dialog1">
+            <md-dialog-title>Settings</md-dialog-title>
+            <md-dialog-content>
+              <md-input-container>
+                <label for="movie">Theme</label>
+                <md-select name="movie" id="movie" v-model="movie">
+                  <md-option value="fight_club">Fight Club</md-option>
+                  <md-option value="godfather">Godfather</md-option>
+                  <md-option value="godfather_ii">Godfather II</md-option>
+                </md-select>
+              </md-input-container>
+
+              <div>
+                <md-switch v-model="checked1" id="my-test1"  name="my-test1" class="md-primary">Show genre</md-switch>
+              </div>
+            </md-dialog-content>
+
+            <md-dialog-actions>
+                <md-button class="md-primary" @click="closeDialog('dialog1')">Cancel</md-button>
+                <md-button class="md-primary" @click="closeDialog('dialog1')">Ok</md-button>
+            </md-dialog-actions>
+        </md-dialog>
+
+
     </div>
 </template>
 
@@ -142,10 +166,13 @@
         alert('like clicked')
       },
       settings: function (event) {
-        alert('settings clicked')
+        this.$refs[event].open()
       },
       toggleLeftSidenav: function (event) {
         this.$refs.leftSidenav.toggle()
+      },
+      closeDialog: function (ref) {
+        this.$refs[ref].close()
       },
       scanLib: function (event) {
         this.toggleLeftSidenav()
