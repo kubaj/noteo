@@ -1,3 +1,5 @@
+import ImageProcessor from './imgprocessor'
+
 const walk = require('walk')
 const fs = require('fs')
 const mm = require('musicmetadata')
@@ -6,6 +8,7 @@ const path = require('path')
 const getDB = require('../vuex/db')
 
 let db = {}
+let proc
 
 class Song {
   constructor (artist, album, name, track, disc, file, duration, playcount) {
@@ -47,6 +50,7 @@ let audio = new Audio()
 
 function scanDir (dir, callback) {
   db = getDB()
+  proc = new ImageProcessor()
 
   db.songs.mapToClass(Song)
   db.albums.mapToClass(Album)
@@ -99,10 +103,13 @@ function insertAlbum (scannedFile) {
   db.albums.where('[artist+name]').equals([scannedFile.metadata.artist[0], scannedFile.metadata.album])
     .count().then(function (val) {
       if (val === 0) {
+        let thumbnailPath = proc.saveImage(scannedFile.metadata.picture)
+
         let newAlbum = new Album(scannedFile.metadata.artist[0],
           scannedFile.metadata.album,
           scannedFile.metadata.year,
-          scannedFile.metadata.genre[0], null)
+          scannedFile.metadata.genre[0],
+          thumbnailPath)
 
         insertGenre(scannedFile)
 

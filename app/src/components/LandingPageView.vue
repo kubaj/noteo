@@ -61,7 +61,7 @@
 
                 <div class="album-container">
                     <div class="album-placeholder" v-for="album in albums">
-                        <album :albumName="album.name" :artistName="album.artist" albumPicture="file:///home/jakub/Downloads/card-sky.jpg"></album>
+                        <album :albumName="album.name" :artistName="album.artist" :albumPicture="'thumb://' + album.thumbnail"></album>
                     </div>
                 </div>
 

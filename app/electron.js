@@ -60,3 +60,12 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+app.on('ready', () => {
+  electron.protocol.registerFileProtocol('thumb', (request, callback) => {
+    const url = request.url.substr(8)
+    callback({path: path.join(app.getPath('userData'), 'ThumbnailCache', url)})
+  }, (error) => {
+    if (error) console.error('Failed to register protocol')
+  })
+})
