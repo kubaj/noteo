@@ -7,7 +7,7 @@ var getDB = function initDb () {
   db = new Dexie('lib')
   db.version(1).stores({
     songs: '++id,artist,album,name,&file',
-    albums: '++id,&[artist+name],year,genre',
+    albums: '++id,&[artist+name],artist,year,genre',
     artists: '++id,&name,*albums',
     genres: '++id,&name'
   })
