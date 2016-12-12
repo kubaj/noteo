@@ -30,7 +30,9 @@
                 </md-button>
 
                 <md-button class="md-icon-button" v-on:click="play">
-                    <md-icon>play_circle_outline</md-icon>
+                    <md-icon>
+                      {{(playerState.isPlaying ? 'pause_circle_outline' : 'play_circle_outline')}}
+                    </md-icon>
                 </md-button>
 
                 <md-button class="md-icon-button" v-on:click="fastForward">
@@ -45,7 +47,7 @@
                     <md-icon>menu</md-icon>
                 </md-button>
 
-                <h2 class="md-title" style="flex: 1;">Noteo</h2>
+                <h2 class="md-title" style="flex: 1;"><span v-if="currentSong">{{currentSong.name}} <small>{{currentSong.artist}} - {{playerState.currentTime}}</small></span></h2>
 
                 <md-button class="md-icon-button" v-on:click="search">
                     <md-icon>search</md-icon>
@@ -96,7 +98,8 @@
             </md-tab>
 
             <md-tab id="now-playing" md-label="Now playing">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
+                <songs-table></songs-table>
+                <queue></queue>
             </md-tab>
 
             <md-tab id="settings" md-label="Settings">
@@ -113,6 +116,8 @@
   import Versions from './LandingPageView/Versions'
   import Library from './LandingPageView/Library'
   import Album from './LandingPageView/Album'
+  import SongsTable from './LandingPageView/SongsTable'
+  import Queue from './LandingPageView/Queue'
   import scanDir from './scanner'
   const dialog = require('electron').remote.dialog
 
@@ -122,18 +127,20 @@
       CurrentPage,
       Links,
       Versions,
-      Album
+      Album,
+      SongsTable,
+      Queue
     },
     methods: {
 
       play: function (event) {
-        alert('play clicked')
+        this.$store.commit('PLAYER_TOGGLE')
       },
       fastRewind: function (event) {
-        alert('fast_rewind clicked')
+        this.$store.commit('PLAYER_PREVIOUS')
       },
       fastForward: function (event) {
-        alert('fast_forward clicked')
+        this.$store.commit('PLAYER_NEXT')
       },
       search: function (event) {
         alert('search clicked')
@@ -167,6 +174,12 @@
     computed: {
       albums () {
         return this.$store.getters.albums
+      },
+      playerState () {
+        return this.$store.getters.player
+      },
+      currentSong () {
+        return this.$store.getters.currentSong
       }
     },
     name: 'landing-page'
