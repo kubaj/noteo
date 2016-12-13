@@ -110,6 +110,12 @@ const mutations = {
   [types.SET_CURRENT_IMAGE] (state, album) {
     state.currentAlbum = album
   },
+  [types.PLAY_ALBUM] (state, songs) {
+    state.queue = songs
+    state.currentSong = 0
+    fetchSong()
+    store.commit('PLAY')
+  },
   [types._REFRESH_TIME] (state) {
     state.currentTime = audioBackend.currentTime
   }

@@ -15,8 +15,14 @@
   .album-texts {
     width: 70%;
     flex: 1 1 auto;
-    padding: 5px 20px;
+    padding: 5px 20px 0;
     position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+  .album-texts-actions {
+    margin: -6px -8px;
   }
   .close-btn {
     position: absolute;
@@ -37,11 +43,19 @@
         </md-card-media-cover>
       </md-card>
       <div class="album-texts">
-        <md-button class="md-icon-button close-btn" v-on:click="goBack()">
-          <md-icon>close</md-icon>
-        </md-button>
-        <span class="md-display-1">{{albumData.name}}</span>
-        <h2>{{albumData.artist}}</h2>
+        <div class="album-texts-top">
+          <md-button class="md-icon-button close-btn" v-on:click="goBack()">
+            <md-icon>close</md-icon>
+          </md-button>
+          <span class="md-display-1">{{albumData.name}}</span>
+          <h2>{{albumData.artist}}</h2>
+        </div>
+        <div class="album-texts-actions">
+          <md-button class="md-raised md-accent" v-on:click="playAlbum(songs)">
+            <md-icon>play_arrow</md-icon>
+            <span>Play album</span>
+          </md-button>
+        </div>
       </div>
     </div>
 
@@ -85,6 +99,9 @@
       },
       addSong: function (song) {
         this.$store.commit('ADD_SONG', song)
+      },
+      playAlbum: function (songs) {
+        this.$store.commit('PLAY_ALBUM', songs)
       },
       goBack: function () {
         history.go(-1)

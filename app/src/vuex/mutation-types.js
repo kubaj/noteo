@@ -15,6 +15,7 @@ export const SET_CURRENT_IMAGE = 'SET_CURRENT_IMAGE'
 export const CLEAR_QUEUE = 'CLEAR_QUEUE'
 export const PLAYER_NEXT = 'PLAYER_NEXT'
 export const PLAYER_PREVIOUS = 'PLAYER_PREVIOUS'
+export const PLAY_ALBUM = 'PLAY_ALBUM'
 
 export const _REFRESH_TIME = '_REFRESH_TIME'
 
