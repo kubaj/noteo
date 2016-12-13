@@ -2,6 +2,7 @@
   .album-view {
     max-width: 800px;
     margin: 15px auto;
+    padding: 0 15px;
   }
   .album-head {
     display: flex;
