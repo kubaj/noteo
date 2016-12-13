@@ -39,7 +39,7 @@
     methods: {
     },
     created: function () {
-      this.$store.dispatch('getGenres')
+      this.$store.dispatch('getAllArtists')
       this.$store.dispatch('getAllAlbums')
       this.$store.dispatch('getAllSettings')
     },
