@@ -10,46 +10,32 @@
     width: 240px;
     flex: 0 0 auto;
   }
-  .album-container {
+  .library-main-content-container {
     flex: 1 1 auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin: 10px 15px;
-  }
-  .album-placeholder {
-    flex: 1 1 230px;
-    margin: 10px;
   }
 </style>
 
 <template>
-    <div class="library-main-view">
-        <div class="library-sidebar">
-            <genres></genres>
-        </div>
-        <div class="album-container">
-            <div class="album-placeholder" v-for="album in albums">
-                <album :albumName="album.name" :artistName="album.artist" :albumPicture="album.thumbnail"></album>
-            </div>
-            <div class="album-placeholder"></div>
-            <div class="album-placeholder"></div>
-            <div class="album-placeholder"></div>
-            <div class="album-placeholder"></div>
-            <div class="album-placeholder"></div>
-        </div>
+  <div class="library-main-view">
+    <div class="library-sidebar">
+      <genres></genres>
     </div>
+
+    <div class="library-main-content-container">
+      <!-- will be replaced by router-view -->
+      <album-list></album-list>
+    </div>
+  </div>
 </template>
 
 <script>
   import Genres from './Genres.vue'
-  import Album from './Album.vue'
+  import AlbumList from './AlbumList.vue'
 
   export default {
     components: {
       Genres,
-      Album
+      AlbumList
     },
     methods: {
     },
@@ -57,11 +43,6 @@
       this.$store.dispatch('getGenres')
       this.$store.dispatch('getAllAlbums')
       this.$store.dispatch('getAllSettings')
-    },
-    computed: {
-      albums () {
-        return this.$store.getters.albums
-      }
     },
     data () {
       return {}
