@@ -31,7 +31,8 @@
       <md-card class="album-thumb">
         <md-card-media-cover md-solid>
           <md-card-media md-ratio="1:1">
-            <img :src="'thumb://' + albumData.thumbnail" alt="Skyscraper">
+            <img v-if="albumData.thumbnail !== null" :src="'thumb://' + albumData.thumbnail" alt="Skyscraper">
+            <img v-if="albumData.thumbnail === null" src="./assets/noart.png" alt="Skyscraper">
           </md-card-media>
         </md-card-media-cover>
       </md-card>
