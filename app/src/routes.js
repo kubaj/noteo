@@ -9,7 +9,8 @@ export default [
         component: require('components/LandingPageView/AlbumList')
       },
       {
-        path: 'album',
+        path: 'album/:id',
+        name: 'album',
         component: require('components/LandingPageView/AlbumView')
       }
     ]

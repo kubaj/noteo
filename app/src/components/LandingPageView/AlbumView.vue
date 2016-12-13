@@ -4,7 +4,7 @@
 
 <template>
   <div class="album-view">
-    <h1>Album View</h1>
+    <h1>Album View {{$route.params.id}}</h1>
     <router-link to="/">Back</router-link>
   </div>
 </template>

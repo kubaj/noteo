@@ -9,7 +9,7 @@
 </style>
 <template>
     <div>
-        <router-link to="album">
+        <router-link :to="{name: 'album', params: { id: album.id }}">
         <md-card>
             <md-ink-ripple></md-ink-ripple>
             <md-card-media-cover md-solid>
