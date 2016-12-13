@@ -4,7 +4,10 @@ const state = {
   genres: [],
   albums: [],
   artists: [],
-  songs: []
+  selectedAlbum: {
+    albumData: {},
+    songs: []
+  }
 }
 
 const mutations = {
@@ -17,8 +20,8 @@ const mutations = {
   [types.SET_ARTISTS] (state, artists) {
     state.artists = artists
   },
-  [types.SET_SONGS] (state, songs) {
-    state.songs = songs
+  [types.SET_ALBUM_DATA] (state, data) {
+    state.selectedAlbum = data
   }
 }
 

@@ -3,7 +3,6 @@ export const INCREMENT_MAIN_COUNTER = 'INCREMENT_MAIN_COUNTER'
 export const SET_GENRES = 'SET_GENRES'
 export const SET_ALBUMS = 'SET_ALBUMS'
 export const SET_ARTISTS = 'SET_ARTISTS'
-export const SET_SONGS = 'SET_SONGS'
 
 // Player
 export const PLAY = 'PLAY'
@@ -16,3 +15,7 @@ export const PLAYER_NEXT = 'PLAYER_NEXT'
 export const PLAYER_PREVIOUS = 'PLAYER_PREVIOUS'
 
 export const _REFRESH_TIME = '_REFRESH_TIME'
+
+export const SET_ALBUM_DATA = 'SET_ALBUM_DATA'
+export const SET_LIB_PATH = 'SET_LIB_PATH'
+export const SHOW_GENRES = 'SHOW_GENRES'

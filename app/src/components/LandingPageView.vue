@@ -1,24 +1,28 @@
 <style scoped>
-    .md-tabs .md-tab {
-        padding: 0px;
-    }
+  .main-view {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: column;
+  }
 
-    .album-container {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .album-placeholder {
-        width: 250px;
-        margin: 5px;
-    }
+  .lib-container {
+    flex-grow: 1;
+    overflow-y: scroll;
+  }
 
+  .settings-dialog {
+      width: 500px;
+  }
 </style>
 
 <template>
     <div>
-        <md-toolbar class="md-medium">
+        <div class="main-view">
+          <md-toolbar class="md-medium main-toolbar">
             <div class="md-toolbar-container">
 
                 <md-button class="md-icon-button">
@@ -43,93 +47,65 @@
                     <md-icon>favorite_border</md-icon>
                 </md-button>
 
-                <md-button class="md-icon-button" @click="toggleLeftSidenav">
-                    <md-icon>menu</md-icon>
-                </md-button>
-
                 <h2 class="md-title" style="flex: 1;"><span v-if="currentSong">{{currentSong.name}} <small>{{currentSong.artist}} - {{playerState.currentTime}}</small></span></h2>
 
                 <md-button class="md-icon-button" v-on:click="search">
                     <md-icon>search</md-icon>
                 </md-button>
 
-                <md-button class="md-icon-button" v-on:click="settings">
+                <md-button class="md-icon-button" v-on:click="settings('dialog1')">
                     <md-icon>settings</md-icon>
                 </md-button>
             </div>
-        </md-toolbar>
+          </md-toolbar>
+          <div class="lib-container">
+            <library></library>
+          </div>
+        </div>
 
-        <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')">
-            <md-toolbar class="md-large">
-                <div class="md-toolbar-container">
-                    <h3 class="md-title">Noteo menu</h3>
-                </div>
-            </md-toolbar>
+        <md-dialog md-open-from="custom" md-close-to="#custom" ref="dialog1">
+            <md-dialog-title>Settings</md-dialog-title>
+            <md-dialog-content>
+                <div class="settings-dialog">
+                    <p>Path to music library: <br>
+                        <span v-if="settingzlibpath">{{ settingzlibpath }}</span>
+                        <span v-if="!settingzlibpath">You didn't set path to your library yet!</span>
+                    </p>
+                    <md-button class="md-primary md-raised" v-on:click="setLib()">Set path</md-button>
+                    <md-button class="md-primary md-raised" v-on:click="scanLib()">Scan library</md-button>
 
-            <md-list>
-                <md-list-item @click="scanLib">
-                    <md-icon>search</md-icon>
-                    <span>Scan library</span>
-                </md-list-item>
-            </md-list>
+                    <!--<md-input-container>-->
+                        <!--<label for="movie">Theme</label>-->
+                        <!--<md-select name="movie" id="movie" v-model="movie">-->
+                            <!--<md-option value="fight_club">Fight Club</md-option>-->
+                            <!--<md-option value="godfather">Godfather</md-option>-->
+                            <!--<md-option value="godfather_ii">Godfather II</md-option>-->
+                        <!--</md-select>-->
+                    <!--</md-input-container>-->
 
-        </md-sidenav>
-
-        <md-tabs class="md-transparent">
-            <md-tab id="library" md-label="Library">
-                <library></library>
-            </md-tab>
-
-            <md-tab id="artists" md-label="Artists">
-
-                <div class="album-container">
-                    <div class="album-placeholder" v-for="album in albums">
-                        <album :albumName="album.name" :artistName="album.artist" :albumPicture="'thumb://' + album.thumbnail"></album>
+                    <div>
+                        <md-switch v-model="settingzgenre" class="md-primary">
+                            Show genres in library view</md-switch>
+                        <p>{{ settingzgenre }}</p>
                     </div>
                 </div>
+            </md-dialog-content>
 
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae,
-                    omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis
-                    nihil.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas amet cum vitae,
-                    omnis! Illum quas voluptatem, expedita iste, dicta ipsum ea veniam dolore in, quod saepe reiciendis
-                    nihil.</p>
-            </md-tab>
-
-            <md-tab id="now-playing" md-label="Now playing">
-                <songs-table></songs-table>
-                <queue></queue>
-            </md-tab>
-
-            <md-tab id="settings" md-label="Settings">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt dolorum quas.</p>
-            </md-tab>
-        </md-tabs>
-
+            <md-dialog-actions>
+                <md-button class="md-primary" @click="closeDialog('dialog1')">Ok</md-button>
+            </md-dialog-actions>
+        </md-dialog>
     </div>
 </template>
 
 <script>
-  import CurrentPage from './LandingPageView/CurrentPage'
-  import Links from './LandingPageView/Links'
-  import Versions from './LandingPageView/Versions'
   import Library from './LandingPageView/Library'
-  import Album from './LandingPageView/Album'
-  import SongsTable from './LandingPageView/SongsTable'
-  import Queue from './LandingPageView/Queue'
   import scanDir from './scanner'
   const dialog = require('electron').remote.dialog
 
   export default {
     components: {
-      Library,
-      CurrentPage,
-      Links,
-      Versions,
-      Album,
-      SongsTable,
-      Queue
+      Library
     },
     methods: {
 
@@ -149,26 +125,30 @@
         alert('like clicked')
       },
       settings: function (event) {
-        alert('settings clicked')
+        this.$refs[event].open()
       },
-      toggleLeftSidenav: function (event) {
-        this.$refs.leftSidenav.toggle()
+      closeDialog: function (ref) {
+        this.$refs[ref].close()
       },
-      scanLib: function (event) {
-        this.toggleLeftSidenav()
+      setLibPath: function (files) {
+        if (files) {
+          this.scanLib(files[0])
+          this.$store.dispatch('setLibPath', { libpath: files[0] })
+        }
+      },
+      onScanFinished: function () {
+        // TODO dat sem seksi css loader, resp tuto uz ho len vypnut
+        this.$store.dispatch('getGenres')
+        this.$store.dispatch('getAllAlbums')
+      },
+      setLib: function () {
         dialog.showOpenDialog({
           properties: ['openDirectory']
-        }, function (files) {
-          if (files) {
-            scanDir(files[0])
-          }
-        })
+        }, this.setLibPath)
+        this.scanLib()
       },
-      open: function (event) {
-
-      },
-      close: function (event) {
-
+      scanLib: function () {
+        scanDir(this.settingzlibpath, this.onScanFinished)
       }
     },
     computed: {
@@ -180,7 +160,16 @@
       },
       currentSong () {
         return this.$store.getters.currentSong
+      },
+      settingzlibpath () {
+        return this.$store.getters.setLibpath
+      },
+      setttingzgenre: {
+        get () { return this.$store.getters.setGenresshown },
+        set (val) { this.$store.dispatch('setGenresShown', { genresshown: val }) }
       }
+    },
+    created: function () {
     },
     name: 'landing-page'
   }

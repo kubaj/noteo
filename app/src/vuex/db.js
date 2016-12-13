@@ -9,7 +9,8 @@ var getDB = function initDb () {
     songs: '++id,artist,album,name,&file',
     albums: '++id,&[artist+name],artist,year,genre',
     artists: '++id,&name,*albums',
-    genres: '++id,&name'
+    genres: '++id,&name',
+    settings: '++id,&name'
   })
   return db
 }

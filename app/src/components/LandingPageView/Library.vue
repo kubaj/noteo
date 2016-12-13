@@ -1,29 +1,47 @@
 <style scoped>
-    .genresSection {
-        height: 100%;
-        width: auto;
-    }
+  .library-main-view {
+    display: flex;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .library-sidebar {
+    width: 240px;
+    flex: 0 0 auto;
+  }
+  .library-main-content-container {
+    flex: 1 1 auto;
+  }
 </style>
+
 <template>
-    <div>
-        <div class="genresSection">
-            <genres></genres>
-        </div>
+  <div class="library-main-view">
+    <div class="library-sidebar">
+      <sidebar></sidebar>
     </div>
+
+    <div class="library-main-content-container">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
 <script>
-  import ArtistPreview from './ArtistPreview.vue'
-  import Genres from './Genres.vue'
+  import Sidebar from './Sidebar.vue'
+  import AlbumList from './AlbumList.vue'
+
   export default {
     components: {
-      Genres,
-      ArtistPreview
+      Sidebar,
+      AlbumList
     },
     methods: {
     },
     created: function () {
-      this.$store.dispatch('getGenres')
+      this.$store.dispatch('getAllArtists')
+      this.$store.dispatch('getAllAlbums')
+      this.$store.dispatch('getAllSettings')
     },
     data () {
       return {}

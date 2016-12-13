@@ -9,21 +9,24 @@
 </style>
 <template>
     <div>
+        <router-link :to="{name: 'album', params: { id: album.id }}">
         <md-card>
             <md-ink-ripple></md-ink-ripple>
             <md-card-media-cover md-solid>
                 <md-card-media md-ratio="1:1">
-                    <img :src="albumPicture" alt="Skyscraper">
+                    <img v-if="album.thumbnail !== null" :src="'thumb://' + album.thumbnail" alt="Skyscraper">
+                    <img v-if="album.thumbnail === null" src="./assets/noart.png" alt="Skyscraper">
                 </md-card-media>
 
                 <md-card-area>
                     <md-card-header>
-                        <div class="md-title">{{albumName}}</div>
-                        <div class="md-subhead">{{artistName}}</div>
+                        <div class="md-title">{{album.name}}</div>
+                        <div class="md-subhead">{{album.artist}}</div>
                     </md-card-header>
                 </md-card-area>
             </md-card-media-cover>
         </md-card>
+        </router-link>
     </div>
 </template>
 
@@ -33,9 +36,7 @@
       return {}
     },
     props: [
-      'albumName',
-      'artistName',
-      'albumPicture'
+      'album'
     ],
     methods: {
     },
