@@ -73,7 +73,7 @@ app.on('ready', () => {
 app.on('ready', () => {
   electron.protocol.registerFileProtocol('audio', (request, callback) => {
     const url = request.url.substr(8)
-    callback({path: path.normalize(url)})
+    callback({path: decodeURI(path.normalize(url))})
   }, (error) => {
     if (error) console.error('Failed to register protocol')
   })
