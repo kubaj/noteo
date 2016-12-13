@@ -3,7 +3,11 @@ import * as types from '../mutation-types'
 const state = {
   genres: [],
   albums: [],
-  artists: []
+  artists: [],
+  selectedAlbum: {
+    albumData: {},
+    songs: []
+  }
 }
 
 const mutations = {
@@ -15,6 +19,9 @@ const mutations = {
   },
   [types.SET_ARTISTS] (state, artists) {
     state.artists = artists
+  },
+  [types.SET_ALBUM_DATA] (state, data) {
+    state.selectedAlbum = data
   }
 }
 

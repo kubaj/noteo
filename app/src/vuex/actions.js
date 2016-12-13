@@ -49,6 +49,15 @@ export const getAllAlbums = ({ commit }) => {
   })
 }
 
+export const getSelectedAlbumData = ({ commit }, payload) => {
+  getDB().albums.get(payload.id).then((albumData) => {
+    getDB().songs.where('album').equals(albumData.name).toArray().then((songs) => {
+      commit(types.SET_ALBUM_DATA, {albumData, songs})
+      payload.callback()
+    })
+  })
+}
+
 export const setLibPath = ({ commit }, payload) => {
   ls('libpath', payload.libpath)
   commit(types.SET_LIB_PATH, payload.libpath)
