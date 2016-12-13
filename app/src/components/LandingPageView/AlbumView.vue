@@ -56,6 +56,10 @@
             <md-icon>play_arrow</md-icon>
             <span>Play album</span>
           </md-button>
+          <md-button class="md-raised" v-on:click="queueAlbum(songs)">
+            <md-icon>add</md-icon>
+            <span>Add to queue</span>
+          </md-button>
         </div>
       </div>
     </div>
@@ -103,6 +107,9 @@
       },
       playAlbum: function (songs) {
         this.$store.commit('PLAY_ALBUM', songs)
+      },
+      queueAlbum: function (songs) {
+        this.$store.commit('ADD_ALBUM', songs)
       },
       goBack: function () {
         history.go(-1)

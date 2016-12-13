@@ -117,6 +117,9 @@ const mutations = {
     fetchSong()
     store.commit('PLAY')
   },
+  [types.ADD_ALBUM] (state, songs) {
+    state.queue.push(...songs)
+  },
   [types._REFRESH_TIME] (state) {
     state.currentTime = audioBackend.currentTime
     state.currentProgress = audioBackend.currentTime / audioBackend.duration
