@@ -32,6 +32,7 @@ audioBackend.onended = () => {
 const state = {
   isPlaying: false,
   currentTime: 0,
+  currentProgress: 0,
   currentSong: -1,
   currentAlbum: {},
   queue: []
@@ -118,6 +119,7 @@ const mutations = {
   },
   [types._REFRESH_TIME] (state) {
     state.currentTime = audioBackend.currentTime
+    state.currentProgress = audioBackend.currentTime / audioBackend.duration
   }
 }
 

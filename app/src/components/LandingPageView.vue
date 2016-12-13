@@ -21,6 +21,23 @@
     display: none;
   }
 
+  .progressbar {
+    width: 100%;
+    height: 3px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .progressbar .progress {
+    height: 100%;
+    background: #e91e63; /* hardcoded accent color */
+    transition: 0.6s linear transform;
+    will-change: transform;
+    transform-origin: 0 0;
+  }
+
   .lib-container {
     flex-grow: 1;
     overflow-y: scroll;
@@ -67,6 +84,9 @@
                 <md-button class="md-icon-button" v-on:click="settings('dialog1')">
                     <md-icon>settings</md-icon>
                 </md-button>
+            </div>
+            <div class="progressbar">
+              <div class="progress" v-bind:style="{transform: `scaleX(${playerState.currentProgress})`}"></div>
             </div>
           </md-toolbar>
           <div class="lib-container">
