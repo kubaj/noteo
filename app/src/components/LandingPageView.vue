@@ -22,7 +22,7 @@
 <template>
     <div>
         <div class="main-view">
-          <md-toolbar class="md-medium main-toolbar">
+          <md-toolbar class="md-default main-toolbar">
             <div class="md-toolbar-container">
 
                 <md-button class="md-icon-button">
@@ -47,7 +47,7 @@
                     <md-icon>favorite_border</md-icon>
                 </md-button>
 
-                <h2 class="md-title" style="flex: 1;"><span v-if="currentSong">{{currentSong.name}} <small>{{currentSong.artist}} - {{playerState.currentTime}}</small></span></h2>
+                <h2 class="md-title" style="flex: 1;"><span v-if="currentSong">{{currentSong.name}} - <small>{{currentSong.artist}}</small></span></h2>
 
                 <md-button class="md-icon-button" v-on:click="search">
                     <md-icon>search</md-icon>

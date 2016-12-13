@@ -1,7 +1,7 @@
 <style scoped>
   .sidebar-container {
     position: fixed;
-    top: 88px;
+    top: 64px;
     bottom: 0;
     width: inherit;
   }
