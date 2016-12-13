@@ -14,14 +14,14 @@
             <md-ink-ripple></md-ink-ripple>
             <md-card-media-cover md-solid>
                 <md-card-media md-ratio="1:1">
-                    <img v-if="albumPicture !== null" :src="'thumb://' + albumPicture" alt="Skyscraper">
-                    <img v-if="albumPicture === null" src="./assets/noart.png" alt="Skyscraper">
+                    <img v-if="album.thumbnail !== null" :src="'thumb://' + album.thumbnail" alt="Skyscraper">
+                    <img v-if="album.thumbnail === null" src="./assets/noart.png" alt="Skyscraper">
                 </md-card-media>
 
                 <md-card-area>
                     <md-card-header>
-                        <div class="md-title">{{albumName}}</div>
-                        <div class="md-subhead">{{artistName}}</div>
+                        <div class="md-title">{{album.name}}</div>
+                        <div class="md-subhead">{{album.artist}}</div>
                     </md-card-header>
                 </md-card-area>
             </md-card-media-cover>
@@ -36,9 +36,7 @@
       return {}
     },
     props: [
-      'albumName',
-      'artistName',
-      'albumPicture'
+      'album'
     ],
     methods: {
     },
