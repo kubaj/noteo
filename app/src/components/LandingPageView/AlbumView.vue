@@ -83,7 +83,7 @@
           <md-table-row v-on:dblclick.native="playSong(song)" v-for="song in songs">
             <md-table-cell class="defcur">{{song.track}}</md-table-cell>
             <md-table-cell class="defcur">{{song.name}}</md-table-cell>
-            <md-table-cell class="defcur" md-numeric>{{song.duration}}</md-table-cell>
+            <md-table-cell class="defcur" md-numeric>{{song.duration | time}}</md-table-cell>
             <md-table-cell>
               <md-button class="md-icon-button" v-on:click="addSong(song)">
                 <md-icon>add</md-icon>

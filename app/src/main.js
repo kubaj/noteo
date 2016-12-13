@@ -20,6 +20,13 @@ Vue.material.theme.register('default', {
   accent: 'pink'
 })
 
+Vue.filter('time', function (value) {
+  let minutes = Math.floor(value / 60)
+  let seconds = Math.floor(value - minutes * 60)
+  let secondsPadded = (seconds < 10) ? '0' + seconds : seconds
+  return minutes + ':' + secondsPadded
+})
+
 const router = new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes
