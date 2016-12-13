@@ -58,6 +58,12 @@ export const getSelectedAlbumData = ({ commit }, payload) => {
   })
 }
 
+export const getAlbumArt = ({ commit }, payload) => {
+  getDB().albums.where('[artist+name]').equals([payload.artist, payload.album]).first().then((album) => {
+    commit(types.SET_CURRENT_IMAGE, album)
+  })
+}
+
 export const setLibPath = ({ commit }, payload) => {
   ls('libpath', payload.libpath)
   commit(types.SET_LIB_PATH, payload.libpath)

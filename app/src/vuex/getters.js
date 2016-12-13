@@ -7,3 +7,4 @@ export const currentSong = state => state.player.queue[state.player.currentSong]
 export const selectedAlbumData = state => state.library.selectedAlbum
 export const setLibpath = state => state.settings.libpath
 export const setGenresshown = state => state.settings.genresshown
+export const getCurrentAlbum = state => state.player.currentAlbum.thumbnail

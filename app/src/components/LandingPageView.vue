@@ -9,6 +9,18 @@
     flex-flow: column;
   }
 
+  .main-toolbar {
+    padding-left: 0;
+  }
+
+  .current-albumart {
+    height: 100%;
+  }
+
+  .current-albumart.hidden {
+    display: none;
+  }
+
   .lib-container {
     flex-grow: 1;
     overflow-y: scroll;
@@ -17,6 +29,7 @@
   .settings-dialog {
       width: 500px;
   }
+
 </style>
 
 <template>
@@ -25,9 +38,7 @@
           <md-toolbar class="md-default main-toolbar">
             <div class="md-toolbar-container">
 
-                <md-button class="md-icon-button">
-                    <md-icon>picture_in_picture</md-icon>
-                </md-button>
+                <img class="current-albumart" v-bind:class="{hidden: !currentAlbumArt}" :src="currentAlbumArt">
 
                 <md-button class="md-icon-button" v-on:click="fastRewind">
                     <md-icon>fast_rewind</md-icon>
@@ -160,6 +171,15 @@
       },
       currentSong () {
         return this.$store.getters.currentSong
+      },
+      currentAlbumArt () {
+        let img = this.$store.getters.getCurrentAlbum
+        console.log(img)
+        if (img) {
+          return 'thumb://' + img
+        } else {
+          return null
+        }
       },
       settingzlibpath () {
         return this.$store.getters.setLibpath

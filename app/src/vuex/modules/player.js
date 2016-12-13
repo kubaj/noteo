@@ -6,6 +6,11 @@ const audioBackend = new Audio()
 
 function fetchSong () {
   let currentSong = state.queue[state.currentSong]
+
+  store.dispatch('getAlbumArt', {
+    artist: currentSong.artist, album: currentSong.album
+  })
+
   audioBackend.src = 'audio://' + currentSong.file
   audioBackend.play()
 
@@ -28,6 +33,7 @@ const state = {
   isPlaying: false,
   currentTime: 0,
   currentSong: -1,
+  currentAlbum: {},
   queue: []
 }
 
@@ -60,6 +66,7 @@ const mutations = {
     } else {
       state.isPlaying = false
       state.currentSong = -1
+      state.currentAlbum = {}
       audioBackend.pause()
       audioBackend.currentTime = 0
     }
@@ -97,7 +104,11 @@ const mutations = {
     } else {
       state.queue = []
       state.currentSong = -1
+      state.currentAlbum = {}
     }
+  },
+  [types.SET_CURRENT_IMAGE] (state, album) {
+    state.currentAlbum = album
   },
   [types._REFRESH_TIME] (state) {
     state.currentTime = audioBackend.currentTime
