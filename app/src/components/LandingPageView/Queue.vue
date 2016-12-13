@@ -25,7 +25,7 @@
       <md-subheader >
         <span class="queue-title">Queue</span>
         <md-button class="md-icon-button clear-queue" v-on:click="clearQueue()">
-          <md-icon>clear_all</md-icon>
+          <md-icon>delete</md-icon>
         </md-button>
       </md-subheader>
       <md-list-item class="queue-item" v-for="(song, index) in player.queue" v-on:click="playSong(index)">
