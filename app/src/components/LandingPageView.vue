@@ -1,10 +1,24 @@
 <style scoped>
+  .main-view {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: column;
+  }
 
+  .lib-container {
+    flex-grow: 1;
+    overflow-y: scroll;
+  }
 </style>
 
 <template>
     <div>
-        <md-toolbar class="md-medium">
+        <div class="main-view">
+          <md-toolbar class="md-medium main-toolbar">
             <div class="md-toolbar-container">
 
                 <md-button class="md-icon-button">
@@ -41,7 +55,11 @@
                     <md-icon>settings</md-icon>
                 </md-button>
             </div>
-        </md-toolbar>
+          </md-toolbar>
+          <div class="lib-container">
+            <library></library>
+          </div>
+        </div>
 
         <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')">
             <md-toolbar class="md-large">
@@ -81,8 +99,6 @@
                 <md-button class="md-primary" @click="closeDialog('dialog1')">Ok</md-button>
             </md-dialog-actions>
         </md-dialog>
-
-        <library></library>
     </div>
 </template>
 
