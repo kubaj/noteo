@@ -34,7 +34,9 @@
                 </md-button>
 
                 <md-button class="md-icon-button" v-on:click="play">
-                    <md-icon>play_circle_outline</md-icon>
+                    <md-icon>
+                      {{(playerState.isPlaying ? 'pause_circle_outline' : 'play_circle_outline')}}
+                    </md-icon>
                 </md-button>
 
                 <md-button class="md-icon-button" v-on:click="fastForward">
@@ -45,7 +47,7 @@
                     <md-icon>favorite_border</md-icon>
                 </md-button>
 
-                <div style="flex: 1"></div>
+                <h2 class="md-title" style="flex: 1;"><span v-if="currentSong">{{currentSong.name}} <small>{{currentSong.artist}} - {{playerState.currentTime}}</small></span></h2>
 
                 <md-button class="md-icon-button" v-on:click="search">
                     <md-icon>search</md-icon>
@@ -108,13 +110,13 @@
     methods: {
 
       play: function (event) {
-        alert('play clicked')
+        this.$store.commit('PLAYER_TOGGLE')
       },
       fastRewind: function (event) {
-        alert('fast_rewind clicked')
+        this.$store.commit('PLAYER_PREVIOUS')
       },
       fastForward: function (event) {
-        alert('fast_forward clicked')
+        this.$store.commit('PLAYER_NEXT')
       },
       search: function (event) {
         alert('search clicked')
@@ -150,6 +152,15 @@
       }
     },
     computed: {
+      albums () {
+        return this.$store.getters.albums
+      },
+      playerState () {
+        return this.$store.getters.player
+      },
+      currentSong () {
+        return this.$store.getters.currentSong
+      },
       settingzlibpath () {
         return this.$store.getters.setLibpath
       },

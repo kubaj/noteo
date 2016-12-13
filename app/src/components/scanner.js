@@ -126,7 +126,7 @@ function insertSong (scannedFile) {
     scannedFile.metadata.title,
     scannedFile.metadata.track.no,
     -1,
-    scannedFile.fullPath,
+    encodeURI(scannedFile.fullPath),
     scannedFile.metadata.duration, 0)
 
   db.songs.put(newSong)

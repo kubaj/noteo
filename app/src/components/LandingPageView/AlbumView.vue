@@ -22,12 +22,12 @@
         </md-table-header>
 
         <md-table-body>
-          <md-table-row v-on:dblclick.native="test()" v-for="song in songs">
+          <md-table-row v-on:dblclick.native="playSong(song)" v-for="song in songs">
             <md-table-cell>{{song.track}}</md-table-cell>
             <md-table-cell>{{song.name}}</md-table-cell>
             <md-table-cell md-numeric>{{song.duration}}</md-table-cell>
             <md-table-cell>
-              <md-button class="md-icon-button">
+              <md-button class="md-icon-button" v-on:click="addSong(song)">
                 <md-icon>add</md-icon>
               </md-button>
             </md-table-cell>
@@ -45,8 +45,11 @@
     components: {
     },
     methods: {
-      test () {
-        console.log(1)
+      playSong: function (song) {
+        this.$store.commit('PLAY_SONG', song)
+      },
+      addSong: function (song) {
+        this.$store.commit('ADD_SONG', song)
       }
     },
     data () {
