@@ -18,7 +18,7 @@
 <template>
   <div class="library-main-view">
     <div class="library-sidebar">
-      <genres></genres>
+      <sidebar></sidebar>
     </div>
 
     <div class="library-main-content-container">
@@ -29,12 +29,12 @@
 </template>
 
 <script>
-  import Genres from './Genres.vue'
+  import Sidebar from './Sidebar.vue'
   import AlbumList from './AlbumList.vue'
 
   export default {
     components: {
-      Genres,
+      Sidebar,
       AlbumList
     },
     methods: {
