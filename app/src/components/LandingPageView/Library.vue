@@ -13,6 +13,10 @@
   .library-main-content-container {
     flex: 1 1 auto;
   }
+  .queue-sidebar {
+    width: 240px;
+    flex: 0 0 auto;
+  }
 </style>
 
 <template>
@@ -24,17 +28,23 @@
     <div class="library-main-content-container">
       <router-view></router-view>
     </div>
+
+    <div class="queue-sidebar">
+      <queue></queue>
+    </div>
   </div>
 </template>
 
 <script>
   import Sidebar from './Sidebar.vue'
   import AlbumList from './AlbumList.vue'
+  import Queue from './Queue.vue'
 
   export default {
     components: {
       Sidebar,
-      AlbumList
+      AlbumList,
+      Queue
     },
     methods: {
     },
