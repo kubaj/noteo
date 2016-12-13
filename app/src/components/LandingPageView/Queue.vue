@@ -16,6 +16,7 @@
   }
   .queue-title {
     flex: 1 1 auto;
+    cursor: default;
   }
 </style>
 

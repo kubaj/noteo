@@ -22,6 +22,10 @@
     flex-flow: column;
     justify-content: space-between;
   }
+  .album-texts-top,
+  .defcur {
+    cursor: default;
+  }
   .album-texts-actions {
     margin: -6px -8px;
   }
@@ -77,9 +81,9 @@
 
         <md-table-body>
           <md-table-row v-on:dblclick.native="playSong(song)" v-for="song in songs">
-            <md-table-cell>{{song.track}}</md-table-cell>
-            <md-table-cell>{{song.name}}</md-table-cell>
-            <md-table-cell md-numeric>{{song.duration}}</md-table-cell>
+            <md-table-cell class="defcur">{{song.track}}</md-table-cell>
+            <md-table-cell class="defcur">{{song.name}}</md-table-cell>
+            <md-table-cell class="defcur" md-numeric>{{song.duration}}</md-table-cell>
             <md-table-cell>
               <md-button class="md-icon-button" v-on:click="addSong(song)">
                 <md-icon>add</md-icon>

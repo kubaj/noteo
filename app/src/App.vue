@@ -6,6 +6,7 @@
   * {
     margin: 0;
     padding: 0;
+    -webkit-user-select: none;
   }
 
   html,
@@ -20,6 +21,10 @@
       );
     background-position: center;
     font-family: Roboto, Helvetica, sans-serif;
+  }
+
+  img {
+    pointer-events: none;
   }
 </style>
 
