@@ -56,6 +56,7 @@
     created: function () {
       this.$store.dispatch('getGenres')
       this.$store.dispatch('getAllAlbums')
+      this.$store.dispatch('getAllSettings')
     },
     computed: {
       albums () {

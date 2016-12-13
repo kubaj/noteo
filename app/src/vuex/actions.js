@@ -1,5 +1,6 @@
 import * as types from './mutation-types'
 import getDB from './db'
+let ls = require('local-storage')
 
 export const decrementMain = ({ commit }) => {
   commit(types.DECREMENT_MAIN_COUNTER)
@@ -40,4 +41,33 @@ export const getAllAlbums = ({ commit }) => {
   getDB().albums.toCollection().toArray().then((data) => {
     commit(types.SET_ALBUMS, data)
   })
+}
+
+export const setLibPath = ({ commit }, payload) => {
+  ls('libpath', payload.libpath)
+  commit(types.SET_LIB_PATH, payload.libpath)
+}
+
+export const setGenresShown = ({ commit }, payload) => {
+  ls('genresshown', payload.genresshown)
+  commit(types.SHOW_GENRES, payload.genresshown)
+}
+
+export const getAllSettings = ({ commit }) => {
+  let libpath = ls('libpath')
+  let genresshown = ls('genresshown')
+
+  if (libpath === null) {
+    ls('libpath', '')
+    commit(types.SET_LIB_PATH, '')
+  } else {
+    commit(types.SET_LIB_PATH, libpath)
+  }
+
+  if (genresshown === null) {
+    ls('genresshown', false)
+    commit(types.SHOW_GENRES, false)
+  } else {
+    commit(types.SHOW_GENRES, genresshown)
+  }
 }

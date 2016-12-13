@@ -13,6 +13,10 @@
     flex-grow: 1;
     overflow-y: scroll;
   }
+
+  .settings-dialog {
+      width: 500px;
+  }
 </style>
 
 <template>
@@ -41,11 +45,7 @@
                     <md-icon>favorite_border</md-icon>
                 </md-button>
 
-                <md-button class="md-icon-button" @click="toggleLeftSidenav">
-                    <md-icon>menu</md-icon>
-                </md-button>
-
-                <h2 class="md-title" style="flex: 1;">Noteo</h2>
+                <div style="flex: 1"></div>
 
                 <md-button class="md-icon-button" v-on:click="search">
                     <md-icon>search</md-icon>
@@ -61,41 +61,35 @@
           </div>
         </div>
 
-        <md-sidenav class="md-left" ref="leftSidenav" @open="open('Left')" @close="close('Left')">
-            <md-toolbar class="md-large">
-                <div class="md-toolbar-container">
-                    <h3 class="md-title">Noteo menu</h3>
-                </div>
-            </md-toolbar>
-
-            <md-list>
-                <md-list-item @click="scanLib">
-                    <md-icon>search</md-icon>
-                    <span>Scan library</span>
-                </md-list-item>
-            </md-list>
-
-        </md-sidenav>
-
         <md-dialog md-open-from="custom" md-close-to="#custom" ref="dialog1">
             <md-dialog-title>Settings</md-dialog-title>
             <md-dialog-content>
-                <md-input-container>
-                    <label for="movie">Theme</label>
-                    <md-select name="movie" id="movie" v-model="movie">
-                        <md-option value="fight_club">Fight Club</md-option>
-                        <md-option value="godfather">Godfather</md-option>
-                        <md-option value="godfather_ii">Godfather II</md-option>
-                    </md-select>
-                </md-input-container>
+                <div class="settings-dialog">
+                    <p>Path to music library: <br>
+                        <span v-if="settingzlibpath">{{ settingzlibpath }}</span>
+                        <span v-if="!settingzlibpath">You didn't set path to your library yet!</span>
+                    </p>
+                    <md-button class="md-primary md-raised" v-on:click="setLib()">Set path</md-button>
+                    <md-button class="md-primary md-raised" v-on:click="scanLib()">Scan library</md-button>
 
-                <div>
-                    <md-switch v-model="checked1" id="my-test1"  name="my-test1" class="md-primary">Show genre</md-switch>
+                    <!--<md-input-container>-->
+                        <!--<label for="movie">Theme</label>-->
+                        <!--<md-select name="movie" id="movie" v-model="movie">-->
+                            <!--<md-option value="fight_club">Fight Club</md-option>-->
+                            <!--<md-option value="godfather">Godfather</md-option>-->
+                            <!--<md-option value="godfather_ii">Godfather II</md-option>-->
+                        <!--</md-select>-->
+                    <!--</md-input-container>-->
+
+                    <div>
+                        <md-switch v-model="settingzgenre" class="md-primary">
+                            Show genres in library view</md-switch>
+                        <p>{{ settingzgenre }}</p>
+                    </div>
                 </div>
             </md-dialog-content>
 
             <md-dialog-actions>
-                <md-button class="md-primary" @click="closeDialog('dialog1')">Cancel</md-button>
                 <md-button class="md-primary" @click="closeDialog('dialog1')">Ok</md-button>
             </md-dialog-actions>
         </md-dialog>
@@ -131,30 +125,40 @@
       settings: function (event) {
         this.$refs[event].open()
       },
-      toggleLeftSidenav: function (event) {
-        this.$refs.leftSidenav.toggle()
-      },
       closeDialog: function (ref) {
         this.$refs[ref].close()
       },
-      scanLib: function (event) {
-        this.toggleLeftSidenav()
+      setLibPath: function (files) {
+        if (files) {
+          this.scanLib(files[0])
+          this.$store.dispatch('setLibPath', { libpath: files[0] })
+        }
+      },
+      onScanFinished: function () {
+        // TODO dat sem seksi css loader, resp tuto uz ho len vypnut
+        this.$store.dispatch('getGenres')
+        this.$store.dispatch('getAllAlbums')
+      },
+      setLib: function () {
         dialog.showOpenDialog({
           properties: ['openDirectory']
-        }, function (files) {
-          if (files) {
-            scanDir(files[0])
-          }
-        })
+        }, this.setLibPath)
+        this.scanLib()
       },
-      open: function (event) {
-
-      },
-      close: function (event) {
-
+      scanLib: function () {
+        scanDir(this.settingzlibpath, this.onScanFinished)
       }
     },
     computed: {
+      settingzlibpath () {
+        return this.$store.getters.setLibpath
+      },
+      setttingzgenre: {
+        get () { return this.$store.getters.setGenresshown },
+        set (val) { this.$store.dispatch('setGenresShown', { genresshown: val }) }
+      }
+    },
+    created: function () {
     },
     name: 'landing-page'
   }

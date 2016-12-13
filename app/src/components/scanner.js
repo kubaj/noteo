@@ -59,6 +59,8 @@ function scanDir (dir, callback) {
 
   let walker = walk.walk(dir)
 
+  walker.on('end', callback)
+
   walker.on('file', function (root, fileStats, next) {
     let scannedFile = {}
     scannedFile.fstats = fileStats
