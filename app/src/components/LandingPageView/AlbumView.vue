@@ -3,12 +3,46 @@
     max-width: 800px;
     margin: 15px auto;
   }
+  .album-head {
+    display: flex;
+    flex-flow: row;
+    margin: 10px 0 30px;
+  }
+  .album-thumb {
+    width: 30%;
+    flex: 1 1 auto;
+  }
+  .album-texts {
+    width: 70%;
+    flex: 1 1 auto;
+    padding: 5px 20px;
+    position: relative;
+  }
+  .close-btn {
+    position: absolute;
+    top: 0;
+    right: 0
+  }
 </style>
 
 <template>
   <div class="album-view">
-    <h1>Album View {{$route.params.id}}</h1>
-    <router-link to="/">Back</router-link>
+    <div class="album-head">
+      <md-card class="album-thumb">
+        <md-card-media-cover md-solid>
+          <md-card-media md-ratio="1:1">
+            <img :src="'thumb://' + albumData.thumbnail" alt="Skyscraper">
+          </md-card-media>
+        </md-card-media-cover>
+      </md-card>
+      <div class="album-texts">
+        <md-button class="md-icon-button close-btn" v-on:click="goBack()">
+          <md-icon>close</md-icon>
+        </md-button>
+        <span class="md-display-1">{{albumData.name}}</span>
+        <h2>{{albumData.artist}}</h2>
+      </div>
+    </div>
 
     <md-table-card>
       <md-table>
@@ -50,6 +84,9 @@
       },
       addSong: function (song) {
         this.$store.commit('ADD_SONG', song)
+      },
+      goBack: function () {
+        history.go(-1)
       }
     },
     data () {
