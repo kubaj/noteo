@@ -31,7 +31,7 @@
         </div>
         <div class="album-container">
             <div class="album-placeholder" v-for="album in albums">
-                <album :albumName="album.name" :artistName="album.artist" :albumPicture="'thumb://' + album.thumbnail"></album>
+                <album :albumName="album.name" :artistName="album.artist" :albumPicture="album.thumbnail"></album>
             </div>
             <div class="album-placeholder"></div>
             <div class="album-placeholder"></div>

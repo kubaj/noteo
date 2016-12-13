@@ -13,7 +13,8 @@
             <md-ink-ripple></md-ink-ripple>
             <md-card-media-cover md-solid>
                 <md-card-media md-ratio="1:1">
-                    <img :src="albumPicture" alt="Skyscraper">
+                    <img v-if="albumPicture !== null" :src="'thumb://' + albumPicture" alt="Skyscraper">
+                    <img v-if="albumPicture === null" src="./assets/noart.png" alt="Skyscraper">
                 </md-card-media>
 
                 <md-card-area>
