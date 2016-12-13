@@ -22,8 +22,7 @@
     </div>
 
     <div class="library-main-content-container">
-      <!-- will be replaced by router-view -->
-      <album-list></album-list>
+      <router-view></router-view>
     </div>
   </div>
 </template>

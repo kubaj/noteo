@@ -9,6 +9,7 @@
 </style>
 <template>
     <div>
+        <router-link to="album">
         <md-card>
             <md-ink-ripple></md-ink-ripple>
             <md-card-media-cover md-solid>
@@ -25,6 +26,7 @@
                 </md-card-area>
             </md-card-media-cover>
         </md-card>
+        </router-link>
     </div>
 </template>
 
