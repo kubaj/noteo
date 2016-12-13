@@ -46,12 +46,15 @@
     methods: {
       showAllAlbums: function () {
         this.$store.dispatch('getAllAlbums')
+        this.$router.push('/')
       },
       selectGenre: function (genreName) {
         this.$store.dispatch('setGenre', {genre: genreName.name})
+        this.$router.push('/')
       },
       selectArtist: function (artistName) {
         this.$store.dispatch('setArtist', {artist: artistName})
+        this.$router.push('/')
       }
     },
     computed: {
