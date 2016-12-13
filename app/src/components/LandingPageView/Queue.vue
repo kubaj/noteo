@@ -24,7 +24,7 @@
     <md-list class="queue">
       <md-subheader >
         <span class="queue-title">Queue</span>
-        <md-button class="md-icon-button clear-queue">
+        <md-button class="md-icon-button clear-queue" v-on:click="clearQueue()">
           <md-icon>clear_all</md-icon>
         </md-button>
       </md-subheader>
@@ -44,6 +44,9 @@
     methods: {
       playSong: function (index) {
         this.$store.commit('SET_CURRENT_INDEX', index)
+      },
+      clearQueue: function () {
+        this.$store.commit('CLEAR_QUEUE')
       }
     },
     computed: {

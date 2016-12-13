@@ -89,6 +89,16 @@ const mutations = {
     fetchSong()
     store.commit('PLAY')
   },
+  [types.CLEAR_QUEUE] (state) {
+    if (state.isPlaying) {
+      let current = state.queue[state.currentSong]
+      state.queue = []
+      state.currentSong = state.queue.push(current) - 1
+    } else {
+      state.queue = []
+      state.currentSong = -1
+    }
+  },
   [types._REFRESH_TIME] (state) {
     state.currentTime = audioBackend.currentTime
   }

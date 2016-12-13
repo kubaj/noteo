@@ -11,6 +11,7 @@ export const PLAYER_TOGGLE = 'PLAYER_TOGGLE'
 export const PLAY_SONG = 'PLAY_SONG'
 export const ADD_SONG = 'ADD_SONG'
 export const SET_CURRENT_INDEX = 'SET_CURRENT_INDEX'
+export const CLEAR_QUEUE = 'CLEAR_QUEUE'
 export const PLAYER_NEXT = 'PLAYER_NEXT'
 export const PLAYER_PREVIOUS = 'PLAYER_PREVIOUS'
 
