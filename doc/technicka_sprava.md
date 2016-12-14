@@ -76,3 +76,40 @@ Testovací protokol bude vo forme
 ### Nástroje pro tvorbu GUI
 
 V projekte sme použili spomínaný Electron ktorý nám dokáže spustiť webovu aplikáciu ako natívnu. Samotná aplikácia je založená na webových technológiach ako je html, css a javascript. Pre tvorbu aplikácie sme využili framework Vue s Material Designom. Výhoda tohto riešenia spočíva v rýchlosti vývoja a zároveň je vyvíjaná aplikácia multiplatformná. Obmedzujúce môže byť pri použití tejto technológie sú väčšie nároky na hardvérové zdroje počítača. Štruktúra aplikácie je daná boilerplatom frameworku Vue - aplikácia sa skladá z komponentov ktoré sú následne tiež zložené z jednoduchších komponentov. To znamená že jednotlivé prvky rozhrania sú znovupoužiteľné. 
+
+### Užívateľské testy
+Užívateľ vyplnil po otestovaní krátky dotazník kde hodnotil jednotlivé úlohy číslami 1 - 5 na základe náročnosti (1 je najľahšie, 5 je najťažšie)
+
+1. Nastavte priečinok v ktorom sa nachádza hudba:
+70% hodnotilo známkou 1, 15% známkou 2, zvyšok hodnotil známkami 3-5. Pripomienky: *"Dlhšie mi trvalo, kým som došiel k tomu že sa bude cesta nás-tavovať v nastaveniach, inak nemám čo vytknúť"*
+2. Nájdite album “Night visions” od interpreta “Imagine Dragons” a pridajteho do playlistu:
+80% hodnotilo známkou 1, 10% známkou 2, zvyšok známkami 3-5.
+3. Nájdite skladbu s názvom “Dark Necessities” v albume “The Getaway” odinterpreta “Red Hot Chilli Peppers”:
+100% hodnotilo známkou 1. Pripomienky: *"Bolo to veľmi jednoduché, okamžite som vedel čo mám robiť"*
+4. Pridajte túto skladbu do playlistu:
+60% hodnotilo známkou 1, 20% hodnotilo známkou 2, 10% hodnotilo známkou 3, 10% hodnotilo známkou 4. Pripomienky: *"Dlhšie mi trvalo kým som prišiel na to ako to urobiť"*, *"Nebolo  to  veľmi  intuitívne,  očakával  som  že  sa  to  bude  robiť jednoduchšie*"
+5. Spustite prehrávanie playlistu, preskočte až na poslednú skladbu a následne prehrávanie pozastavte a vymažte playlist:
+65% hodnotilo známkou 1, 25% hodnotilo známkou 2, 10% známkou 3-5.
+
+### Výsledky a záver
+
+Ohlasy používateľov na aplikáciu boli pozitívne, o čom svedčia aj výsledky testovania. 
+
+V prehľadnosti užívateľského rozhrania veľmi pomáha ikonografické zobrazenie prvkov ako je napríklad ozubené koliesko pre zobrazenie nastavení - z toho plynie dobrý výsledok z testovania prvej úlohy. 
+
+Druhá a tretia boli z pohľadu užívateľov veľmi jednoduché. Úlohy boli navzájom dosť podobné, takže sa dal očakávať podobný výsledok.
+
+Štvrtá úloha sa zdala byť užívateľom neintuitívna tak sme museli zmeniť spôsob pridávania skladieb do playlistu.
+
+V piatej úlohe bol problém s vymazávaním obsahu playlistu, využívali sme ikonu "clear all" zo sady Material Design Icons, avšak užívatelia mali problém identifikovať správnu funkčnosť tejto ikony, bola nahradená intuitívnejšou ikonou smetného koša.
+
+### Tímová spolupráca
+
+Tímová spolupráca je pre mňa nová skúsenosť ktorá bude určite ďalej využiteľná. Tvorba projektu mi ukázala cesty ako spoločne vymýšľať riešenia a hľadať kompromisy v prípade nezhode názorov. Na tímovej spolupráci sa mi taktiež páčila výmena skúseností, čo nám ušetrilo množstvo času. Tímová spolupráca má aj nevýhody - napríklad stala komunikácia s ostatnými členmi a stretávania sa aby sme mohli konzultovať stav projektu a plánovať si ďalší vývoj.
+
+### Záver
+
+Hlavný cieľ projektu bol vytvoriť hudobný prehrávač ktorý má prívetivé užívateľské rozhranie. Myslím že toto sa nám úspešne podarilo a zároveň sme si všetci počas vývoja nazbierali kopu nových skúseností či už z navrhovania grafických rozhraní alebo samotného použitia vývojových technológií. 
+
+Výsledná forma aplikácie:
+![](/home/jakub/fit/itu/sprava/final.png) 
