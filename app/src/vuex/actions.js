@@ -102,7 +102,6 @@ export const getFavouriteSongs = ({ commit }, payload) => {
   })
 }
 
-
 export const setSearchString = ({ commit }, payload) => {
   commit(types.SET_SEARCH_STRING, payload.string)
 }
