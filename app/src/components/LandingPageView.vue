@@ -209,7 +209,7 @@
       },
       onScanFinished: function () {
         // TODO dat sem seksi css loader, resp tuto uz ho len vypnut
-        this.$store.dispatch('getGenres')
+        this.$store.dispatch('getAllArtists')
         this.$store.dispatch('getAllAlbums')
       },
       setLib: function () {
