@@ -123,6 +123,11 @@ const mutations = {
   [types._REFRESH_TIME] (state) {
     state.currentTime = audioBackend.currentTime
     state.currentProgress = audioBackend.currentTime / audioBackend.duration
+  },
+  [types.TOGGLE_FAVOURITE] (state, fav) {
+    if (state.currentSong !== -1 && state.queue !== undefined) {
+      state.queue[state.currentSong].favourite = fav
+    }
   }
 }
 

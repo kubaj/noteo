@@ -11,7 +11,7 @@ let db = {}
 let proc
 
 class Song {
-  constructor (artist, album, name, track, disc, file, duration, playcount) {
+  constructor (artist, album, name, track, disc, file, duration, playcount, favourite) {
     this.artist = artist
     this.album = album
     this.name = name
@@ -20,6 +20,7 @@ class Song {
     this.file = file
     this.duration = duration
     this.playcount = playcount
+    this.favourite = favourite
   }
 }
 
@@ -127,7 +128,8 @@ function insertSong (scannedFile) {
     scannedFile.metadata.track.no,
     -1,
     encodeURI(scannedFile.fullPath),
-    scannedFile.metadata.duration, 0)
+    scannedFile.metadata.duration, 0,
+    'false')
 
   db.songs.put(newSong)
 }

@@ -100,7 +100,8 @@
                 </md-button>
 
                 <md-button class="md-icon-button" v-on:click="like">
-                    <md-icon>favorite_border</md-icon>
+                    <md-icon v-if="currentSong && currentSong.favourite === 'true'">favorite</md-icon>
+                    <md-icon v-if="currentSong && currentSong.favourite === 'false'">favorite_border</md-icon>
                 </md-button>
 
                 <h2 class="md-title" style="flex: 1;"><span v-if="currentSong">{{currentSong.name}} - <small>{{currentSong.artist}}</small></span></h2>
@@ -148,11 +149,11 @@
                         <!--</md-select>-->
                     <!--</md-input-container>-->
 
-                    <div>
-                        <md-switch v-model="settingzgenre" class="md-primary">
-                            Show genres in library view</md-switch>
-                        <p>{{ settingzgenre }}</p>
-                    </div>
+                    <!--<div>-->
+                        <!--<md-switch v-model="settingzgenre" class="md-primary">-->
+                            <!--Show genres in library view</md-switch>-->
+                        <!--<p>{{ settingzgenre }}</p>-->
+                    <!--</div>-->
                 </div>
             </md-dialog-content>
 
@@ -192,7 +193,7 @@
         this.$store.commit('PLAYER_NEXT')
       },
       like: function (event) {
-        alert('like clicked')
+        this.$store.dispatch('toggleFavourite', { song: this.currentSong })
       },
       settings: function (event) {
         this.$refs[event].open()
@@ -202,7 +203,7 @@
       },
       setLibPath: function (files) {
         if (files) {
-          this.scanLib(files[0])
+          scanDir(files[0], this.onScanFinished)
           this.$store.dispatch('setLibPath', { libpath: files[0] })
         }
       },
@@ -215,7 +216,6 @@
         dialog.showOpenDialog({
           properties: ['openDirectory']
         }, this.setLibPath)
-        this.scanLib()
       },
       scanLib: function () {
         scanDir(this.settingzlibpath, this.onScanFinished)

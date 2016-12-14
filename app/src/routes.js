@@ -12,6 +12,11 @@ export default [
         path: 'album/:id',
         name: 'album',
         component: require('components/LandingPageView/AlbumView')
+      },
+      {
+        path: 'favourites',
+        name: 'favourites',
+        component: require('components/LandingPageView/FavouriteView')
       }
     ]
   },

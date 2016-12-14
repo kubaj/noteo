@@ -2,14 +2,6 @@ import * as types from './mutation-types'
 import getDB from './db'
 let ls = require('local-storage')
 
-export const decrementMain = ({ commit }) => {
-  commit(types.DECREMENT_MAIN_COUNTER)
-}
-
-export const incrementMain = ({ commit }) => {
-  commit(types.INCREMENT_MAIN_COUNTER)
-}
-
 export const setGenre = ({ commit }, payload) => {
   getDB().albums.where('genre').equals(payload.genre).toArray().then((data) => {
     let unique = {}
@@ -92,6 +84,24 @@ export const getAllSettings = ({ commit }) => {
     commit(types.SHOW_GENRES, genresshown)
   }
 }
+
+export const toggleFavourite = ({ commit }, payload) => {
+  if (payload.song.favourite === 'false') {
+    getDB().songs.update(payload.song.id, { favourite: 'true' })
+    commit(types.TOGGLE_FAVOURITE, 'true')
+  } else {
+    getDB().songs.update(payload.song.id, { favourite: 'false' })
+    commit(types.TOGGLE_FAVOURITE, 'false')
+  }
+}
+
+export const getFavouriteSongs = ({ commit }, payload) => {
+  getDB().songs.where('favourite').equals('true').toArray().then(data => {
+    commit(types.SET_FAVOURITE_SONGS, data)
+    payload.callback()
+  })
+}
+
 
 export const setSearchString = ({ commit }, payload) => {
   commit(types.SET_SEARCH_STRING, payload.string)

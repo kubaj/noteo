@@ -24,6 +24,7 @@
         <span>All albums</span>
       </md-list-item>
       <md-list-item class="sidebar-item">
+        <router-link to="favourites">
         <md-icon>favorite</md-icon>
         <span>Favorites</span>
         <md-divider class="md-inset"></md-divider>
