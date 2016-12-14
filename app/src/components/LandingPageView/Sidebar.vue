@@ -28,8 +28,8 @@
         <md-icon>favorite</md-icon>
         <span>Favorites</span>
         <md-divider class="md-inset"></md-divider>
+        </router-link>
       </md-list-item>
-
       <md-subheader>Artists</md-subheader>
 
       <md-list-item class="sidebar-item" v-for="artist in artists" v-on:click="selectArtist(artist.name)" v-show="artist.name.toLowerCase().startsWith(searchString.toLowerCase())">
