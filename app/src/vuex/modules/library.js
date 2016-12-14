@@ -7,7 +7,8 @@ const state = {
   selectedAlbum: {
     albumData: {},
     songs: []
-  }
+  },
+  searchString: ''
 }
 
 const mutations = {
@@ -22,6 +23,9 @@ const mutations = {
   },
   [types.SET_ALBUM_DATA] (state, data) {
     state.selectedAlbum = data
+  },
+  [types.SET_SEARCH_STRING] (state, string) {
+    state.searchString = string
   }
 }
 

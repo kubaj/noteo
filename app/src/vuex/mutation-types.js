@@ -3,6 +3,7 @@ export const INCREMENT_MAIN_COUNTER = 'INCREMENT_MAIN_COUNTER'
 export const SET_GENRES = 'SET_GENRES'
 export const SET_ALBUMS = 'SET_ALBUMS'
 export const SET_ARTISTS = 'SET_ARTISTS'
+export const SET_SEARCH_STRING = 'SET_SEARCH_STRING'
 
 // Player
 export const PLAY = 'PLAY'

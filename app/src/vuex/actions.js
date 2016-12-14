@@ -92,3 +92,7 @@ export const getAllSettings = ({ commit }) => {
     commit(types.SHOW_GENRES, genresshown)
   }
 }
+
+export const setSearchString = ({ commit }, payload) => {
+  commit(types.SET_SEARCH_STRING, payload.string)
+}

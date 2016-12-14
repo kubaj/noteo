@@ -31,7 +31,7 @@
 
       <md-subheader>Artists</md-subheader>
 
-      <md-list-item class="sidebar-item" v-for="artist in artists" v-on:click="selectArtist(artist.name)">
+      <md-list-item class="sidebar-item" v-for="artist in artists" v-on:click="selectArtist(artist.name)" v-show="artist.name.toLowerCase().startsWith(searchString.toLowerCase())">
         <span>{{ artist.name }}</span>
       </md-list-item>
     </md-list>
@@ -63,6 +63,9 @@
       },
       artists () {
         return this.$store.getters.artists
+      },
+      searchString () {
+        return this.$store.getters.getSearchString
       }
     }
   }

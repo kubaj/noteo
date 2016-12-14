@@ -117,7 +117,7 @@
               <div class="progress" v-bind:style="{transform: `scaleX(${playerState.currentProgress})`}"></div>
             </div>
             <md-whiteframe class="searchbar" v-show="showSearch">
-              <input type="text" name="search" placeholder="Search...">
+              <input v-model="searchString" type="text" name="search" placeholder="Search...">
               <md-button class="md-icon-button search-close" v-on:click="search(false)">
                 <md-icon>close</md-icon>
               </md-button>
@@ -180,7 +180,7 @@
     methods: {
       search: function (setTo) {
         this.showSearch = setTo
-        console.log(this.showSearch)
+        this.$store.commit('SET_SEARCH_STRING', '')
       },
       play: function (event) {
         this.$store.commit('PLAYER_TOGGLE')
@@ -246,6 +246,10 @@
       setttingzgenre: {
         get () { return this.$store.getters.setGenresshown },
         set (val) { this.$store.dispatch('setGenresShown', { genresshown: val }) }
+      },
+      searchString: {
+        get () { return this.$store.getters.getSearchString },
+        set (val) { this.$store.dispatch('setSearchString', { string: val }) }
       }
     },
     created: function () {

@@ -14,7 +14,7 @@
 
 <template>
   <div class="album-container">
-      <div class="album-placeholder" v-for="album in albums">
+      <div class="album-placeholder" v-for="album in albums" v-show="album.name.toLowerCase().startsWith(searchString.toLowerCase())">
           <album :album="album"></album>
       </div>
       <div class="album-placeholder"></div>
@@ -37,6 +37,9 @@
     computed: {
       albums () {
         return this.$store.getters.albums
+      },
+      searchString () {
+        return this.$store.getters.getSearchString
       }
     },
     data () {
