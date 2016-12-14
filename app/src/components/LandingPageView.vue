@@ -38,6 +38,34 @@
     transform-origin: 0 0;
   }
 
+  .searchbar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    display: flex;
+    flex-flow: row;
+    align-items: center
+  }
+
+  .searchbar input {
+    flex: 1 1 auto;
+    height: 100%;
+    font-size: 24px;
+    padding: 5px 20px;
+    border: none;
+  }
+
+  .searchbar input:focus {
+    outline: none;
+  }
+
+  .search-close {
+    color: black;
+  }
+
   .lib-container {
     flex-grow: 1;
     overflow-y: scroll;
@@ -77,7 +105,7 @@
 
                 <h2 class="md-title" style="flex: 1;"><span v-if="currentSong">{{currentSong.name}} - <small>{{currentSong.artist}}</small></span></h2>
 
-                <md-button class="md-icon-button" v-on:click="search">
+                <md-button class="md-icon-button" v-on:click="search(true)">
                     <md-icon>search</md-icon>
                 </md-button>
 
@@ -88,6 +116,12 @@
             <div class="progressbar">
               <div class="progress" v-bind:style="{transform: `scaleX(${playerState.currentProgress})`}"></div>
             </div>
+            <md-whiteframe class="searchbar" v-show="showSearch">
+              <input type="text" name="search" placeholder="Search...">
+              <md-button class="md-icon-button search-close" v-on:click="search(false)">
+                <md-icon>close</md-icon>
+              </md-button>
+            </md-whiteframe>
           </md-toolbar>
           <div class="lib-container">
             <library></library>
@@ -138,8 +172,16 @@
     components: {
       Library
     },
+    data: function () {
+      return {
+        showSearch: false
+      }
+    },
     methods: {
-
+      search: function (setTo) {
+        this.showSearch = setTo
+        console.log(this.showSearch)
+      },
       play: function (event) {
         this.$store.commit('PLAYER_TOGGLE')
       },
@@ -148,9 +190,6 @@
       },
       fastForward: function (event) {
         this.$store.commit('PLAYER_NEXT')
-      },
-      search: function (event) {
-        alert('search clicked')
       },
       like: function (event) {
         alert('like clicked')
